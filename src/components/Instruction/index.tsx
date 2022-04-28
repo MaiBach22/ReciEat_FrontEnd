@@ -7,7 +7,6 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import { useSelector } from "react-redux";
 import { getInstructions } from "../../store/recipe/Slices/recipeSlice";
-import { IndexKind } from "typescript";
 
 export default function Instruction() {
   const instruc = useSelector(getInstructions);

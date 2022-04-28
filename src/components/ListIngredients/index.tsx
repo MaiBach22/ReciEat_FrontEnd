@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Box, Grid } from "@mui/material";
+import { Typography } from "@mui/material";
 
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";

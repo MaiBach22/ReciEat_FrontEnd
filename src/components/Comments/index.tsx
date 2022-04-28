@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import {
-  fetchAsyncComments,
-  getComments,
-} from "../../store/recipe/Slices/recipeSlice";
+import { getComments } from "../../store/recipe/Slices/recipeSlice";
 import { Grid, Theme, Typography } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
-import { Paper, Box, Button } from "@mui/material";
+import { Paper } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";

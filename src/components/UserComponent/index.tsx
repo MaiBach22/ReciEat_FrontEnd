@@ -5,7 +5,6 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { Link } from "@mui/material";
 import { Icon } from "@mui/material";
 import AddRecipe from "../AddRecipeForm";
 interface TabPanelProps {

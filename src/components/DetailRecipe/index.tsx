@@ -5,17 +5,15 @@ import { useAppDispatch } from "../../store";
 import {
   fetchAsyncRecipeDetail,
   getRecipeDetail,
-  getIngredients,
   getTags,
   removeListing,
 } from "../../store/recipe/Slices/recipeSlice";
 
 import Ingredients from "../ListIngredients";
 import Comments from "../Comments";
-import { Grid, Button, Typography, Box, Theme, Paper } from "@mui/material";
+import { Grid, Button, Typography, Box, Theme } from "@mui/material";
 import { useSelector } from "react-redux";
 
-import { experimentalStyled as styled } from "@mui/material/styles";
 import { makeStyles } from "@material-ui/core";
 
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";

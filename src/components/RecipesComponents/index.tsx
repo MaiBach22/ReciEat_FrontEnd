@@ -6,9 +6,9 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import AccessAlarmOutlinedIcon from "@mui/icons-material/AccessAlarmOutlined";
-// import { experimentalStyled as style } from "@mui/material/styles";
+
 import styled from "@mui/material/styles/styled";
-import { Grid, Button, Box, Theme, keyframes } from "@mui/material";
+import { Grid, Box } from "@mui/material";
 import { Link } from "@material-ui/core";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import SpaIcon from "@mui/icons-material/Spa";
@@ -17,7 +17,7 @@ import BreakfastDiningOutlinedIcon from "@mui/icons-material/BreakfastDiningOutl
 import OutdoorGrillOutlinedIcon from "@mui/icons-material/OutdoorGrillOutlined";
 import IconButton from "@mui/material/IconButton";
 import { makeStyles } from "@material-ui/core";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import Aos from "aos";
 import "aos/dist/aos.css";

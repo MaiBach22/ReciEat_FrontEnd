@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { TextField } from "@material-ui/core";
-import { Grid, Theme, Typography, Paper } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import IconButton from "@mui/material/IconButton";
 import { useAppDispatch } from "../../store";
-import { useParams } from "react-router-dom";
-import {
-  addComments,
-  fetchAsyncComments,
-} from "../../store/recipe/Slices/recipeSlice";
-import { useSelector } from "react-redux";
+
+import { fetchAsyncComments } from "../../store/recipe/Slices/recipeSlice";
 
 export const CommentForm = () => {
   const [content, setContent] = useState("");

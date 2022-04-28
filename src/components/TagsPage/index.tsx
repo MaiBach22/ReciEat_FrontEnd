@@ -14,15 +14,10 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import AccessAlarmOutlinedIcon from "@mui/icons-material/AccessAlarmOutlined";
-import { experimentalStyled as styled } from "@mui/material/styles";
-import { Grid, Button, Box, Theme } from "@mui/material";
+
+import { Grid, Box, Theme } from "@mui/material";
 import { Link } from "@material-ui/core";
-import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
-import SpaIcon from "@mui/icons-material/Spa";
-import DinnerDiningIcon from "@mui/icons-material/DinnerDining";
-import BreakfastDiningOutlinedIcon from "@mui/icons-material/BreakfastDiningOutlined";
-import OutdoorGrillOutlinedIcon from "@mui/icons-material/OutdoorGrillOutlined";
-import IconButton from "@mui/material/IconButton";
+
 import { makeStyles } from "@material-ui/core";
 
 const hoverStyle = makeStyles((theme: Theme) => ({
