@@ -7,6 +7,8 @@ import Box from "@mui/material/Box";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Icon } from "@mui/material";
 import AddRecipe from "../AddRecipeForm";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/auth/loginSlice";
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -53,6 +55,7 @@ function a11yProps(index: number) {
 
 export default function UserPage() {
   const [value, setValue] = React.useState(0);
+  const user = useSelector(selectUser);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -120,11 +123,11 @@ export default function UserPage() {
                   />
                 </Icon>
                 <Box>
-                  <Typography>username</Typography>
+                  <Typography>{user.username}</Typography>
                 </Box>
               </Box>
               <Box sx={{ width: "100%" }}>
-                <Typography>email:</Typography>
+                <Typography>email: {user.email}</Typography>
               </Box>
             </Box>
           </TabPanel>

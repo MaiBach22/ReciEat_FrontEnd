@@ -8,7 +8,7 @@ export const SET_ALERT = "SET_ALERT";
 export interface Recipes {
   title: string;
   imgUrl: string;
-  id: number;
+  id: any;
   likes: number;
   preptime: string;
   cooktime: string;
@@ -27,8 +27,14 @@ interface Instructions {
 }
 
 interface Ingredients {
-  id: number;
-  amount: number;
+  id: any;
+  amount: string;
+  measure: string;
+  text: string;
+}
+
+interface NewIngredients {
+  amount: string;
   measure: string;
   text: string;
 }
@@ -41,12 +47,26 @@ interface Comments {
 export interface RecipeData extends Recipes {
   title: string;
   imgUrl: string;
-  id: number;
+  id: any;
   likes: number;
   preptime: string;
   cooktime: string;
   serving: string;
   tags: Tags[];
+  ingredients: Ingredients[];
+  instructions: Instructions[];
+  comments: Comments[];
+}
+
+export interface RecipeNew {
+  title: string;
+  imgUrl: string;
+  id: any;
+  likes: number;
+  preptime: string;
+  cooktime: string;
+  serving: string;
+  recipetags: Tags[];
   ingredients: Ingredients[];
   instructions: Instructions[];
   comments: Comments[];
@@ -85,6 +105,8 @@ export interface RecipeState {
   selectedRecipe: RecipeData;
   searchResult: RecipeData[];
   selectedTags: TagData;
+  newRecipe: RecipeNew;
+  tags: Tags[];
 }
 
 interface SetRecipeAction {

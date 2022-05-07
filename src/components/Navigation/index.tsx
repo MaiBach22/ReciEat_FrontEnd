@@ -3,11 +3,13 @@ import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectToken } from "../../store/auth/loginSlice";
+import { logOut, selectToken } from "../../store/auth/loginSlice";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Icon } from "@mui/material";
+import { useAppDispatch } from "../../store";
 export default function NavBar() {
   const token = useSelector(selectToken);
+  const dispatch = useAppDispatch();
   return (
     <div style={{ height: "50px" }}>
       <React.Fragment>
@@ -25,14 +27,24 @@ export default function NavBar() {
                 ReciEat.
               </Link>
             </Typography>
+            {token == null ? (
+              <Button
+                href="/signup"
+                sx={{ marginLeft: "auto", bgcolor: "primary.light" }}
+                variant="contained"
+              >
+                Sign Up
+              </Button>
+            ) : (
+              <Button
+                onClick={() => dispatch(logOut())}
+                sx={{ marginLeft: "auto", bgcolor: "primary.light" }}
+                variant="contained"
+              >
+                Log Out
+              </Button>
+            )}
 
-            <Button
-              href="/signup"
-              sx={{ marginLeft: "auto", bgcolor: "primary.light" }}
-              variant="contained"
-            >
-              Sign Up
-            </Button>
             {token == null ? (
               <Button
                 href="/login"

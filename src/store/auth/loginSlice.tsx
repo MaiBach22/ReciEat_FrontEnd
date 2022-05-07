@@ -76,6 +76,10 @@ const loginSlice = createSlice({
     tokenStillValid: (state, { payload }) => {
       return { ...state, ...payload };
     },
+    logOut: () => {
+      localStorage.removeItem("token");
+      return { ...initialState, token: null };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAsyncLogIn.pending, (state) => {
@@ -101,6 +105,7 @@ const loginSlice = createSlice({
 export default loginSlice.reducer;
 export const { loginSuccess } = loginSlice.actions;
 export const { tokenStillValid } = loginSlice.actions;
+export const { logOut } = loginSlice.actions;
 export const selectUser = (state: RootState) => state.user;
 
 export const selectToken = (state: RootState) => state.user.token;

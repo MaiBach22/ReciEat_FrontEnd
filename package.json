@@ -30,6 +30,7 @@
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
+    "shortid": "^2.2.16",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -58,6 +59,7 @@
   },
   "devDependencies": {
     "@types/aos": "^3.0.4",
+    "@types/shortid": "^0.0.29",
     "typescript": "^4.6.3"
   }
 }

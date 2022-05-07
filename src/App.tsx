@@ -9,9 +9,14 @@ import SearchResult from "./components/SearchResult";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import { useAppDispatch } from "./store";
-import { fetchAsyncUserWithStoredToken } from "./store/auth/loginSlice";
+import {
+  fetchAsyncUserWithStoredToken,
+  selectToken,
+} from "./store/auth/loginSlice";
 import UserPage from "./components/UserComponent";
 import TagsPage from "./components/TagsPage";
+import { useSelector } from "react-redux";
+import { getToken } from "./store/auth/signupSlice";
 declare module "@mui/material/styles" {
   interface Theme {
     status: {
@@ -63,6 +68,7 @@ export const theme = createTheme({
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
+  const token = useSelector(selectToken);
 
   useEffect(() => {
     dispatch(fetchAsyncUserWithStoredToken());
@@ -80,7 +86,7 @@ const App: React.FC = () => {
             <Route path="/result/:term" element={<SearchResult />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/user" element={<UserPage />} />
+            <Route path="/user" element={token ? <UserPage /> : <Login />} />
             <Route path="/tags/:id" element={<TagsPage />} />
           </Routes>
         </ThemeProvider>

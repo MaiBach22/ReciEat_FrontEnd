@@ -40,7 +40,27 @@ export default function Ingredients() {
                     inputProps={{ "aria-labelledby": labelId }}
                   />
                 </ListItemIcon>
-                {ingr.amount == null ? (
+                {ingr.amount == null && ingr.measure == null ? (
+                  <ListItemText
+                    id={labelId}
+                    primary={`${ingr.text}`}
+                    sx={{
+                      fontFamily: "Ubuntu,sans-serif",
+                      fontWeight: "700",
+                      fontSize: "25px",
+                    }}
+                  />
+                ) : ingr.measure == null ? (
+                  <ListItemText
+                    id={labelId}
+                    primary={`${ingr.amount} ${ingr.text}`}
+                    sx={{
+                      fontFamily: "Ubuntu,sans-serif",
+                      fontWeight: "700",
+                      fontSize: "25px",
+                    }}
+                  />
+                ) : ingr.amount == null ? (
                   <ListItemText
                     id={labelId}
                     primary={`${ingr.measure} ${ingr.text}`}

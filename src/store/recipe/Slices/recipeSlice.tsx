@@ -8,10 +8,47 @@ import { selectToken, selectUser } from "../../auth/loginSlice";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 const API_URL = "http://localhost:4000/recipes";
+
+interface Ingredient {
+  id: string;
+  amount: string;
+  measure: string;
+  text: string;
+}
+
+interface Instruction {
+  id: string;
+  content: string;
+}
+
+interface Tags {
+  tagId: string;
+}
+
+interface body {
+  title: string;
+  imgUrl: string;
+  preptime: string;
+  cooktime: string;
+  serving: string;
+  ingredients: Ingredient[];
+  instructions: Instruction[];
+  recipetags: Tags[];
+}
+
 export const fetchAsyncRecipes = createAsyncThunk(
   "recipes/fetchAsyncRecipes",
   async () => {
     const res = await axios.get(API_URL);
+    return res.data;
+  }
+);
+
+export const fetchAsyncTags = createAsyncThunk(
+  "recipes/fetchAsyncTags",
+  async () => {
+    const res = await axios.get("http://localhost:4000/recipes/tags");
+
     return res.data;
   }
 );
@@ -91,6 +128,50 @@ export const fetchAsyncTagsDetail = createAsyncThunk(
   }
 );
 
+export const fetchAsyncNewRecipe = createAsyncThunk(
+  "recipes/fetchAsyncNewRecipe",
+  async (bodynewrecipe: body, thunkApi) => {
+    const state: any = thunkApi.getState();
+    console.log("state", state);
+    const token = state.user.token;
+    const userId: string = state.user.userId;
+
+    //const ingredients: Array<Ingredientsrecipe> = state.recipes.newIngredients;
+    try {
+      console.log("end", bodynewrecipe.title);
+      const res = await axios.post(
+        "http://localhost:4000/recipes/postrecipe",
+        {
+          title: bodynewrecipe.title,
+          imgUrl: bodynewrecipe.imgUrl,
+          preptime: bodynewrecipe.preptime,
+          cooktime: bodynewrecipe.cooktime,
+          serving: bodynewrecipe.serving,
+          ingredients: bodynewrecipe.ingredients,
+          instructions: bodynewrecipe.instructions,
+          userId: userId,
+          recipetags: bodynewrecipe.recipetags,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("end1", bodynewrecipe);
+      thunkApi.dispatch(addRecipe(res.data));
+      return res.data;
+    } catch (error: any) {
+      if (error.response) {
+        console.log("Error in thunk");
+        return { data: error.response.data, succes: false };
+      } else {
+        throw error;
+      }
+    }
+  }
+);
+
 const initialState: RecipeState = {
   data: [
     {
@@ -136,6 +217,25 @@ const initialState: RecipeState = {
     ],
   },
   searchResult: [],
+  newRecipe: {
+    title: "",
+    imgUrl: "",
+    id: 0,
+    likes: 0,
+    preptime: "",
+    cooktime: "",
+    serving: "",
+    ingredients: [],
+    instructions: [],
+    recipetags: [],
+    comments: [{ username: "", content: "" }],
+  },
+  tags: [
+    {
+      id: 0,
+      title: "",
+    },
+  ],
 };
 
 const recipeSlice = createSlice({
@@ -160,6 +260,9 @@ const recipeSlice = createSlice({
     addComments: (state, { payload }) => {
       state.selectedRecipe.comments.push(payload);
     },
+    addRecipe: (state, { payload }) => {
+      state.newRecipe = payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAsyncRecipes.pending, () => {
@@ -174,12 +277,21 @@ const recipeSlice = createSlice({
     });
     builder.addCase(fetchAsyncRecipeDetail.fulfilled, (state, { payload }) => {
       console.log("Fetched Sucessfully");
+      console.log("d", payload);
       return { ...state, selectedRecipe: payload };
     });
 
     builder.addCase(fetchAsyncTagsDetail.fulfilled, (state, { payload }) => {
       console.log("Fetched Sucessfully");
       return { ...state, selectedTags: payload };
+    });
+    builder.addCase(fetchAsyncNewRecipe.fulfilled, (state, { payload }) => {
+      console.log("Fetched Sucessfully");
+      return { ...state, newRecipe: payload };
+    });
+    builder.addCase(fetchAsyncTags.fulfilled, (state, { payload }) => {
+      console.log("Fetched Sucessfully");
+      return { ...state, tags: payload };
     });
   },
 });
@@ -188,7 +300,9 @@ export const { listingRecipes } = recipeSlice.actions;
 export const { listingResult } = recipeSlice.actions;
 export const { addLikes } = recipeSlice.actions;
 export const { addComments } = recipeSlice.actions;
+export const { addRecipe } = recipeSlice.actions;
 export const { removeListing } = recipeSlice.actions;
+
 export const getAllReciTags = (state: RootState) =>
   state.recipes.selectedTags.recipes;
 
@@ -211,5 +325,5 @@ export const getComments = (state: RootState) =>
 export const getResult = (state: RootState) => state.recipes.searchResult;
 export const getLikes = (state: RootState) =>
   state.recipes.selectedRecipe.likes;
-
+export const getAllTags = (state: RootState) => state.recipes.tags;
 export default recipeSlice.reducer;
