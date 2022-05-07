@@ -51,7 +51,7 @@ export const fetchAsyncTags = createAsyncThunk(
 export const fetchAsyncRecipeDetail = createAsyncThunk(
   "recipes/fetchAsyncRecipeDetail",
   async (id: any) => {
-    const res = await axios.get(`https://recieat.herokuapp.com/recipes/${id}`);
+    const res = await axios.get(`${apiUrl}/recipes/${id}`);
     return res.data;
   }
 );
