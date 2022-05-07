@@ -484,6 +484,7 @@ export default function AddRecipe() {
                           >
                             <TextField
                               required
+                              fullWidth
                               sx={{ marginRight: "10px" }}
                               id="outlined-required"
                               label="Content"
