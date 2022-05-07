@@ -464,72 +464,77 @@ export default function AddRecipe() {
                 noValidate
                 autoComplete="off"
               >
-                <Grid container spacing={1} item xs={11} md={12}>
-                  <Box sx={{ marginBottom: "20px", marginTop: "20px" }}>
-                    <Typography variant="subtitle1">
-                      Add the instruction to your recipe
-                    </Typography>
-                    <Box>
-                      {instructions.map((ins) => {
-                        return (
-                          <Box
-                            key={ins.id}
-                            sx={{
-                              marginBottom: "20px",
-                              marginTop: "20px",
+                {/* <Grid container spacing={1} item xs={11} md={12}> */}
+                <Box sx={{ marginBottom: "20px", marginTop: "20px" }}>
+                  <Typography variant="subtitle1">
+                    Add the instruction to your recipe
+                  </Typography>
+                  <Box>
+                    {instructions.map((ins) => {
+                      return (
+                        <Box
+                          key={ins.id}
+                          sx={{
+                            marginBottom: "20px",
+                            marginTop: "20px",
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <TextField
+                            required
+                            fullWidth
+                            multiline
+                            maxRows={4}
+                            sx={{ marginRight: "10px" }}
+                            id="outlined-required"
+                            label="Content"
+                            onChange={(e) => {
+                              const content = e.target.value;
+                              setInstructions((currentInstruction) =>
+                                currentInstruction.map((x) =>
+                                  x.id === ins.id
+                                    ? {
+                                        ...x,
+                                        content,
+                                      }
+                                    : x
+                                )
+                              );
+                            }}
+                            value={ins.content}
+                          />
+
+                          <Button
+                            onClick={() => {
+                              setInstructions((currentInstruction) =>
+                                currentInstruction.filter(
+                                  (x) => x.id !== ins.id
+                                )
+                              );
                             }}
                           >
-                            <TextField
-                              required
-                              fullWidth
-                              sx={{ marginRight: "10px" }}
-                              id="outlined-required"
-                              label="Content"
-                              onChange={(e) => {
-                                const content = e.target.value;
-                                setInstructions((currentInstruction) =>
-                                  currentInstruction.map((x) =>
-                                    x.id === ins.id
-                                      ? {
-                                          ...x,
-                                          content,
-                                        }
-                                      : x
-                                  )
-                                );
-                              }}
-                              value={ins.content}
-                            />
+                            x
+                          </Button>
+                        </Box>
+                      );
+                    })}
 
-                            <Button
-                              onClick={() => {
-                                setInstructions((currentInstruction) =>
-                                  currentInstruction.filter(
-                                    (x) => x.id !== ins.id
-                                  )
-                                );
-                              }}
-                            >
-                              x
-                            </Button>
-                          </Box>
-                        );
-                      })}
-
-                      <Button
-                        sx={{
-                          marginLeft: "auto",
-                          bgcolor: "primary.light",
-                        }}
-                        variant="contained"
-                        type="button"
-                        onClick={handleAddInstruction}
-                      >
-                        +
-                      </Button>
-                    </Box>
+                    <Button
+                      sx={{
+                        marginLeft: "auto",
+                        bgcolor: "primary.light",
+                      }}
+                      variant="contained"
+                      type="button"
+                      onClick={handleAddInstruction}
+                    >
+                      +
+                    </Button>
                   </Box>
-                </Grid>
+                </Box>
+                {/* </Grid> */}
               </Box>
             ) : null}
 
