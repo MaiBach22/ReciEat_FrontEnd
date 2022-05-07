@@ -477,9 +477,6 @@ export default function AddRecipe() {
                             sx={{
                               marginBottom: "20px",
                               marginTop: "20px",
-                              display: "flex",
-                              flexDirection: "row",
-                              justifyContent: "center",
                             }}
                           >
                             <TextField
