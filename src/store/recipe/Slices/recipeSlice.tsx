@@ -1,13 +1,8 @@
-import { ActionTypes } from "@mui/base";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
+import { apiUrl } from "../../../config/constants";
 import { RootState } from "../..";
 import { RecipeState } from "../../type";
-import { selectToken, selectUser } from "../../auth/loginSlice";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-const API_URL = "http://localhost:4000/recipes";
 
 interface Ingredient {
   id: string;
@@ -39,7 +34,7 @@ interface body {
 export const fetchAsyncRecipes = createAsyncThunk(
   "recipes/fetchAsyncRecipes",
   async () => {
-    const res = await axios.get(API_URL);
+    const res = await axios.get(`${apiUrl}/recipes`);
     return res.data;
   }
 );
@@ -47,7 +42,7 @@ export const fetchAsyncRecipes = createAsyncThunk(
 export const fetchAsyncTags = createAsyncThunk(
   "recipes/fetchAsyncTags",
   async () => {
-    const res = await axios.get("http://localhost:4000/recipes/tags");
+    const res = await axios.get(`${apiUrl}/recipes/tags`);
 
     return res.data;
   }
@@ -56,7 +51,7 @@ export const fetchAsyncTags = createAsyncThunk(
 export const fetchAsyncRecipeDetail = createAsyncThunk(
   "recipes/fetchAsyncRecipeDetail",
   async (id: any) => {
-    const res = await axios.get(`http://localhost:4000/recipes/${id}`);
+    const res = await axios.get(`${apiUrl}/recipes/${id}`);
     return res.data;
   }
 );
@@ -72,7 +67,7 @@ export const fetchAsyncLikes = createAsyncThunk(
     const id = state.recipes.selectedRecipe.id;
     console.log("hello");
     try {
-      const res = await axios.patch(`http://localhost:4000/recipes/${id}`, {
+      const res = await axios.patch(`${apiUrl}/recipes/${id}`, {
         likes: like,
       });
       console.log("like", res.data.likes);
@@ -98,7 +93,7 @@ export const fetchAsyncComments = createAsyncThunk(
     console.log("hello");
     try {
       const res = await axios.post(
-        `http://localhost:4000/recipes/${id}/comment`,
+        `${apiUrl}/${id}/comment`,
         {
           username: username,
           content: comment,
@@ -123,7 +118,7 @@ export const fetchAsyncComments = createAsyncThunk(
 export const fetchAsyncTagsDetail = createAsyncThunk(
   "recipes/fetchAsyncTagsDetail",
   async (id: any) => {
-    const res = await axios.get(`http://localhost:4000/tags/${id}`);
+    const res = await axios.get(`${apiUrl}/tags/${id}`);
     return res.data;
   }
 );
@@ -140,7 +135,7 @@ export const fetchAsyncNewRecipe = createAsyncThunk(
     try {
       console.log("end", bodynewrecipe.title);
       const res = await axios.post(
-        "http://localhost:4000/recipes/postrecipe",
+        `${apiUrl}/recipes/postrecipe`,
         {
           title: bodynewrecipe.title,
           imgUrl: bodynewrecipe.imgUrl,
